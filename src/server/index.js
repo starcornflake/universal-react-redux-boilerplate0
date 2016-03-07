@@ -6,6 +6,9 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import routes from '../common/config/routes';
 
+import Root from '../common/containers/Root';
+import configureStore from '../common/store/configureStore';
+
 import config from '../common/config';
 
 const app = express();
@@ -37,8 +40,8 @@ function handleRender(req, res, err) {
     // `props` in its state as it listens to `browserHistory`. But on the
     // server our app is stateless, so we need to use `match` to
     // get these props before rendering.
-    const appHtml = renderToString(<RouterContext {...props}/>)
-    console.log(appHtml)
+    const store = configureStore();
+    const appHtml = renderToString(<Root store={store}><RouterContext {...props}/></Root>)
     // dump the HTML into a template, lots of ways to do this, but none are
     // really influenced by React Router, so we're just using a little
     // function, `renderPage`

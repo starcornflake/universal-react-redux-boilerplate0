@@ -9,10 +9,15 @@ import ReactDOM from 'react-dom';
 
 import Root from '../common/containers/Root';
 import configureStore from '../common/store/configureStore';
+import routes from '../common/config/routes';
 
 const store = configureStore();
 
+
+import { Router, browserHistory } from 'react-router';
+// import routes from '../config/routes';
+
 ReactDOM.render(
-  <Root store={store} />,
+  <Root store={store}><Router routes={routes} history={browserHistory} /></Root>,
   document.getElementById('root')
 );

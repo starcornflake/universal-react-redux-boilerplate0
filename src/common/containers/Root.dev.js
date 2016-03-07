@@ -14,7 +14,8 @@ class Root extends React.Component {
     return (
       <Provider store={this.props.store}>
         <div>
-          <Router routes={routes} history={browserHistory} />
+          {/*<Router routes={routes} history={browserHistory} />*/}
+          {this.props.children}
           <DevTools />
         </div>
       </Provider>
