@@ -15,7 +15,6 @@ class Root extends React.Component {
       <Provider store={this.props.store}>
         <div>
           {this.props.children}
-          <DevTools />
         </div>
       </Provider>
     )

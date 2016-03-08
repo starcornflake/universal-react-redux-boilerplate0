@@ -4,6 +4,6 @@ const config = {
     port: 3000
   },
   jsBundle: 'bundle.js'
-};
+}
 
-export default config;
+export default config

@@ -6,7 +6,9 @@ Oddly enough, we're not using webpack's hot loading feature. It adds an unnecess
 ## Usage
 
 ### Commands
-1. **Development:** `npm run dev`
+1. **Development:**
+  * `npm run dev` doesn't restart server automatically (use this if working on client side as it's much faster, since only webpack is rebuilding)
+  * `npm run devs` restarts server automatically
 2. **Build:** `npm run build`
 3. **Production:** `npm run start`
 
@@ -27,3 +29,9 @@ Oddly enough, we're not using webpack's hot loading feature. It adds an unnecess
 
 ### Goodies
 * `axios` - http requests using promises
+* `morgan` - http request logger
+
+
+## Under the hood
+### Client
+* `<Root>` acts as the root component wrapper. It simply requires a store and a `<Router>` child. This makes it easy to render on both client and server. Also, this makes it possible to only render `<DevTools>` if in development mode.
