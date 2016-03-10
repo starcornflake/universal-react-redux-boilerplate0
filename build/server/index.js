@@ -1,7 +1,5 @@
 'use strict';
 
-require('babel-polyfill');
-
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
@@ -43,6 +41,10 @@ var _routes = require('../common/config/routes');
 var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+if (process.env.NODE_ENV != 'production') {
+  require('babel-polyfill');
+}
 
 var app = (0, _express2.default)();
 var port = process.env.PORT || _config2.default.server.port;

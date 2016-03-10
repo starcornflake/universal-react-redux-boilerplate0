@@ -1,4 +1,7 @@
-import 'babel-polyfill'
+if (process.env.NODE_ENV != 'production') {
+  require('babel-polyfill')
+}
+
 import path from 'path'
 import express from 'express'
 import morgan from 'morgan'
