@@ -1,6 +1,16 @@
 # Universal React Redux Boilerplate
 Oddly enough, we're not using webpack's hot loading feature. It adds an unnecessary amount of noise to our code, and the tools built around it is fragile.
 
+Another important point: We're not doing 100% server rendering. That is, anything that requires database or api calls within the server won't be rendered on the server (initial store will always be empty). Instead, the job is forwarded to the client (e.g. `componentDidMount`) to fetch and update state. If your requirement doesn't include friendly SEO's, this removes some overhead logic. It's also better in terms of UX since the initial page load will be much faster.
+
+
+## Tips n tricks
+* Whenever you want to use `require`, use `modules.export` on the file you're requiring (this isn't necessary for all cases, but let's be consistent)
+* You can't use `import` or `export` at the top level. That is, they can't be conditionally run
+  * Stick to `import` or `export` if you can.
+* Whenever you define globals on node with `global.__SOMETHING__`, you don't need the `global.` to reference it
+* `mapStateToProps` subscribes to store; `mapDispatchToProps` doesn't (no render updates)
+
 
 
 ## Usage

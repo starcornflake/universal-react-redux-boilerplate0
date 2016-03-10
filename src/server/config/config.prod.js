@@ -6,4 +6,4 @@ const config = {
   jsBundle: 'bundle.min.js'
 }
 
-export default config
+module.exports = config

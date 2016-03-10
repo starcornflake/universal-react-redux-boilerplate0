@@ -6,4 +6,4 @@ const config = {
   jsBundle: 'bundle.js'
 }
 
-export default config
+module.exports = config

@@ -7,8 +7,8 @@ import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 import favicon from 'serve-favicon'
 
-import config from '../common/config'
-import Root from '../common/containers/Root'
+import config from './config'
+import Root from '../common/components/Root'
 import configureStore from '../common/store/configureStore'
 import routes from '../common/config/routes'
 
