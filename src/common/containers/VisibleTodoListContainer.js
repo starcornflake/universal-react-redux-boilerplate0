@@ -5,6 +5,9 @@ import TodoList from '../components/TodoList'
 
 
 class VisibleTodoListContainer extends Component {
+  async componentDidMount() {
+    
+  }
   render() {
     return (
       <TodoList />
