@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/server/config/config.dev.js"],"names":[],"mappings":";;AAAA,IAAM,SAAS;AACb,UAAQ;AACN,UAAM,WAAN;AACA,UAAM,IAAN;GAFF;AAIA,YAAU,WAAV;CALI;;AAQN,OAAO,OAAP,GAAiB,MAAjB","file":"config.dev.js","sourcesContent":["const config = {\n  server: {\n    host: 'localhost',\n    port: 3000\n  },\n  jsBundle: 'bundle.js'\n}\n\nmodule.exports = config\n"]}
