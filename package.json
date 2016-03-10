@@ -8,7 +8,7 @@
     "devs": "NODE_ENV=development NODEMON=enabled nodemon --watch src/ --exec babel-node src/server",
     "build": "npm run clean && babel src/ -s -d build/ && webpack --config webpack.config.prod.js",
     "clean": "rm -rf build/ public/js/",
-    "start": "NODE_ENV=production node build/server"
+    "start": "NODE_ENV=production npm run build && node build/server"
   },
   "author": "",
   "license": "ISC",
