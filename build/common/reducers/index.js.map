@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/common/reducers/index.js"],"names":[],"mappings":";;;;;;;;;;;;;;AAIA,IAAM,cAAc,4BAAgB;AAClC,wBADkC;CAAhB,CAAd;;kBAIS","file":"index.js","sourcesContent":["import { combineReducers } from 'redux'\n\nimport todos from './todos'\n\nconst rootReducer = combineReducers({\n  todos,\n})\n\nexport default rootReducer\n"]}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/client/config/config.dev.js"],"names":[],"mappings":";;AAAA,IAAM,SAAS,EAAT;;AAIN,OAAO,OAAP,GAAiB,MAAjB","file":"config.dev.js","sourcesContent":["const config = {\n\n}\n\nmodule.exports = config\n"]}
