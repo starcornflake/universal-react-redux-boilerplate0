@@ -17,7 +17,11 @@ var _Todo2 = _interopRequireDefault(_Todo);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var propTypes = {
-  todos: _react.PropTypes.array.isRequired
+  todos: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+    id: _react.PropTypes.number.isRequired,
+    completed: _react.PropTypes.bool.isRequired,
+    text: _react.PropTypes.string.isRequired
+  }).isRequired).isRequired
 };
 
 function TodoList(_ref) {
@@ -27,7 +31,7 @@ function TodoList(_ref) {
     'ul',
     null,
     todos.map(function (todo) {
-      _react2.default.createElement(_Todo2.default, _extends({
+      return _react2.default.createElement(_Todo2.default, _extends({
         key: todo.id
       }, todo));
     })

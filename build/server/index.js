@@ -80,6 +80,8 @@ function handleRender(req, res, err) {
       // we have a match
       var store = (0, _configureStore2.default)();
 
+      console.log(props.components);
+
       var appHtml = (0, _server.renderToString)(_react2.default.createElement(
         _Root2.default,
         { store: store },

@@ -16,15 +16,13 @@ var _AddTodoContainer = require('./AddTodoContainer');
 
 var _AddTodoContainer2 = _interopRequireDefault(_AddTodoContainer);
 
-var _VisibleTodoListContainer = require('./VisibleTodoListContainer');
+var _TodoListContainer = require('./TodoListContainer');
 
-var _VisibleTodoListContainer2 = _interopRequireDefault(_VisibleTodoListContainer);
+var _TodoListContainer2 = _interopRequireDefault(_TodoListContainer);
 
 var _actions = require('../actions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -43,44 +41,24 @@ var HomeContainer = function (_Component) {
 
   _createClass(HomeContainer, [{
     key: 'componentDidMount',
-    value: function () {
-      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                console.log('compDitMount');
-                _context.prev = 1;
-                _context.next = 4;
-                return new Promise(function (resolve) {
-                  setTimeout(function () {
-                    console.log('prom');
-                    resolve();
-                  }, 5000);
-                });
 
-              case 4:
-                _context.next = 9;
-                break;
-
-              case 6:
-                _context.prev = 6;
-                _context.t0 = _context['catch'](1);
-
-                console.log(_context.t0);
-
-              case 9:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this, [[1, 6]]);
-      }));
-
-      return function componentDidMount() {
-        return ref.apply(this, arguments);
-      };
-    }()
+    // Only route components' fetchAll can be reached. Inner components won't.
+    // So this is a good place to fetchAll for the HomeComponent's things
+    // and fetchAll for inner components. (eg AddTodoContainer.fetchAll)
+    value: function componentDidMount() {
+      console.log(this.props.children);
+      console.log('compDitMount');
+      // try {
+      //   await new Promise((resolve) => {
+      //     setTimeout(() => {
+      //       console.log('prom')
+      //       resolve()
+      //     }, 5000)
+      //   })
+      // } catch (err) {
+      //   console.log(err)
+      // }
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -88,9 +66,12 @@ var HomeContainer = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_AddTodoContainer2.default, null),
-        _react2.default.createElement(_VisibleTodoListContainer2.default, null)
+        _react2.default.createElement(_TodoListContainer2.default, null)
       );
     }
+  }], [{
+    key: 'fetchAll',
+    value: function fetchAll() {}
   }]);
 
   return HomeContainer;

@@ -36,6 +36,21 @@ var AddTodoContainer = function (_Component) {
   }
 
   _createClass(AddTodoContainer, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('compDitMount');
+      // try {
+      //   await new Promise((resolve) => {
+      //     setTimeout(() => {
+      //       console.log('prom')
+      //       resolve()
+      //     }, 5000)
+      //   })
+      // } catch (err) {
+      //   console.log(err)
+      // }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(_AddTodoInput2.default, null);

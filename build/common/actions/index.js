@@ -5,12 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addTodo = addTodo;
 
-var _ActionType = require('./ActionType');
+var _ActionTypes = require('./ActionTypes');
 
 var nextTodoId = 0;
 function addTodo(text) {
   return {
-    type: _ActionType.ADD_TODO,
+    type: _ActionTypes.ADD_TODO,
     id: nextTodoId++,
     text: text
   };
