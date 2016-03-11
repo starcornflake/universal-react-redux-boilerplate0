@@ -1,7 +1,4 @@
-if (process.env.NODE_ENV != 'production') {
-  require('babel-polyfill')
-}
-
+import 'babel-polyfill'
 import path from 'path'
 import express from 'express'
 import morgan from 'morgan'
@@ -53,6 +50,8 @@ function handleRender(req, res, err) {
       // we have a match
       const store = configureStore()
 
+      console.log(props.components)
+
       const appHtml = renderToString(
         <Root store={store}>
           <RouterContext {...props} />
@@ -85,10 +84,10 @@ function renderFullPage(html, initialState) {
 
 app.listen(port, () => {
   if (process.env.NODEMON === 'enabled') {
-    console.log(`Server started on port ${port}. (webpack + nodemon)`)
+    console.log(`${process.env.NODE_ENV} server started on port ${port}. (webpack + nodemon)`)
   } else if (process.env.NODEMON === 'disabled') {
-    console.log(`Server started on port ${port}. (webpack)`)
+    console.log(`${process.env.NODE_ENV} server started on port ${port}. (webpack)`)
   } else {
-    console.log(`Server started on port ${port}.`)
+    console.log(`${process.env.NODE_ENV} server started on port ${port}.`)
   }
 })

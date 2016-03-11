@@ -32,7 +32,7 @@ var VisibleTodoListContainer = function (_Component) {
   function VisibleTodoListContainer() {
     _classCallCheck(this, VisibleTodoListContainer);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(VisibleTodoListContainer).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(VisibleTodoListContainer).call(this));
   }
 
   _createClass(VisibleTodoListContainer, [{
@@ -43,11 +43,32 @@ var VisibleTodoListContainer = function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                console.log('compDitMount');
+                _context.prev = 1;
+                _context.next = 4;
+                return new Promise(function (resolve) {
+                  setTimeout(function () {
+                    console.log('prom');
+                    resolve();
+                  }, 5000);
+                });
+
+              case 4:
+                _context.next = 9;
+                break;
+
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context['catch'](1);
+
+                console.log(_context.t0);
+
+              case 9:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee, this, [[1, 6]]);
       }));
 
       return function componentDidMount() {

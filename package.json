@@ -8,7 +8,8 @@
     "devs": "NODE_ENV=development NODEMON=enabled nodemon --watch src/ --exec babel-node src/server",
     "build": "npm run clean && babel src/ -s -d build/ && webpack --config webpack.config.prod.js",
     "clean": "rm -rf build/ public/js/",
-    "start": "NODE_ENV=production node build/server"
+    "start": "NODE_ENV=production node build/server",
+    "buildAndStart": "npm run build && npm run start"
   },
   "author": "",
   "license": "ISC",
@@ -20,8 +21,8 @@
     "axios": "^0.9.1",
     "express": "^4.13.4",
     "morgan": "^1.7.0",
-    "react": "^15.0.0-rc.1",
-    "react-dom": "^15.0.0-rc.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
     "redux": "^3.3.1",

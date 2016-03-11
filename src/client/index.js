@@ -7,6 +7,7 @@ import Root from '../common/components/Root'
 import configureStore from '../common/store/configureStore'
 import routes from '../common/config/routes'
 
+
 const initialState = window.__INITIAL_STATE__
 const store = configureStore(initialState)
 console.log('__CLIENT__:', __CLIENT__)

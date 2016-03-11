@@ -1,5 +1,7 @@
 'use strict';
 
+require('babel-polyfill');
+
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
@@ -41,10 +43,6 @@ var _routes = require('../common/config/routes');
 var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-if (process.env.NODE_ENV != 'production') {
-  require('babel-polyfill');
-}
 
 var app = (0, _express2.default)();
 var port = process.env.PORT || _config2.default.server.port;
@@ -102,11 +100,11 @@ function renderFullPage(html, initialState) {
 
 app.listen(port, function () {
   if (process.env.NODEMON === 'enabled') {
-    console.log('Server started on port ' + port + '. (webpack + nodemon)');
+    console.log(process.env.NODE_ENV + ' server started on port ' + port + '. (webpack + nodemon)');
   } else if (process.env.NODEMON === 'disabled') {
-    console.log('Server started on port ' + port + '. (webpack)');
+    console.log(process.env.NODE_ENV + ' server started on port ' + port + '. (webpack)');
   } else {
-    console.log('Server started on port ' + port + '.');
+    console.log(process.env.NODE_ENV + ' server started on port ' + port + '.');
   }
 });
 //# sourceMappingURL=index.js.map

@@ -5,6 +5,19 @@ import { addTodo } from '../actions'
 import AddTodoInput from '../components/AddTodoInput'
 
 class AddTodoContainer extends Component {
+  componentDidMount() {
+    console.log('compDitMount')
+    // try {
+    //   await new Promise((resolve) => {
+    //     setTimeout(() => {
+    //       console.log('prom')
+    //       resolve()
+    //     }, 5000)
+    //   })
+    // } catch (err) {
+    //   console.log(err)
+    // }
+  }
   render() {
     return (
       <AddTodoInput />

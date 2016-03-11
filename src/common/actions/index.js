@@ -1,6 +1,6 @@
 import {
   ADD_TODO,
-} from './ActionType'
+} from './ActionTypes'
 
 let nextTodoId = 0
 export function addTodo(text) {
