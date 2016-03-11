@@ -5,11 +5,12 @@ import morgan from 'morgan'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
+import { Provider } from 'react-redux'
 import favicon from 'serve-favicon'
 
 import config from './config'
 import api from './config/api'
-import Root from '../common/components/Root'
+import routes from '../common/config/routes'
 import configureStore from '../common/store/configureStore'
 
 const app = express()
@@ -37,36 +38,70 @@ app.use('/api', api)
 
 app.get('*', handleRender)
 
+// function handleRender(req, res, err) {
+//   res.send(renderFullPage());
+// }
+
 function handleRender(req, res, err) {
-  res.send(renderFullPage());
+  match({ routes, location: req.url }, (err, redirect, props) => {
+    if (err) {
+      // error during route matching
+      res.status(500).send(err.message)
+    } else if (redirect) {
+      res.redirect(redirect.pathname + redirect.search)
+    } else if (props) {
+      // we have a match
+      const store = configureStore()
+      console.log(props.components)
+      console.log(props.components.AppContainer === 'function')
+      Promise.all(fetchAll(store, props)).then(() => {
+        try {
+          const appHtml = renderToString(
+            <Provider store={store}>
+              <RouterContext {...props} />
+            </Provider>
+          )
+          res.send(renderFullPage(appHtml, store.getState()))
+        } catch(e) {
+          response.status(500).send("Something went wrong");
+        }
+      }).catch((response) => {
+        console.log(response);
+        response.status(500).send("Something went wrong");
+      });
+
+
+      // const appHtml = renderToString(
+      //   <Root store={store}>
+      //     <RouterContext {...props} />
+      //   </Root>
+      // )
+      //
+      // res.send(renderFullPage(appHtml, store.getState()))
+    } else {
+      // no match
+      res.status(404).send('Not Found')
+    }
+  })
 }
 
-// function handleRender(req, res, err) {
-//   match({ routes, location: req.url }, (err, redirect, props) => {
-//     if (err) {
-//       // error during route matching
-//       res.status(500).send(err.message)
-//     } else if (redirect) {
-//       res.redirect(redirect.pathname + redirect.search)
-//     } else if (props) {
-//       // we have a match
-//       const store = configureStore()
-//
-//       console.log(props.components)
-//
-//       const appHtml = renderToString(
-//         <Root store={store}>
-//           <RouterContext {...props} />
-//         </Root>
-//       )
-//
-//       res.send(renderFullPage(appHtml, store.getState()))
-//     } else {
-//       // no match
-//       res.status(404).send('Not Found')
-//     }
-//   })
+// function fetchAll(store, routerProps) {
+//   const AppContainerClass = routerProps.components.AppContainer
+//   return AppContainerClass.fetchData(store.dispatch, routerProps.params)
+//     .then(routerProps.components.slice(1).map((componentClass) => {
+//       if (componentClass.fetchData) {
+//         return componentClass.fetchData(store.dispatch, routerProps.params)
+//       }
+//   }))
 // }
+
+function fetchAll(store, routerProps) {
+  return routerProps.components.map((componentClass) => {
+    if (componentClass.fetchData) {
+      return componentClass.fetchData(store.dispatch, routerProps.params)
+    }
+  })
+}
 
 function renderFullPage(html, initialState) {
   return `

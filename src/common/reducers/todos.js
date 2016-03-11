@@ -31,6 +31,7 @@ const todoItems = (state = [], action) => {
 
 function todos(state = {
   isFetching: false,
+  didInvalidate: false,
   items: [],
 }, action) {
   switch (action.type) {
@@ -41,11 +42,16 @@ function todos(state = {
       }
     case REQUEST_TODOS:
       return {
-        ...state
+        ...state,
+        isFetching: true,
+        didInvalidate: false,
       }
     case RECEIVE_TODOS:
       return {
-        ...state
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: action.todos,
       }
     default:
       return state

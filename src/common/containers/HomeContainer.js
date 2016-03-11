@@ -3,13 +3,16 @@ import { Link } from 'react-router'
 
 import AddTodoContainer from './AddTodoContainer'
 import TodoListContainer from './TodoListContainer'
-import { fetchTodos } from '../actions'
+import { fetchTodosIfNeeded } from '../actions/todos'
 
 class HomeContainer extends Component {
-  static fetchAll() {
+  static fetchData(dispatch) {
     // Only route components' fetchAll can be reached. Inner components won't.
     // So this is a good place to fetchAll for the HomeComponent's things
     // and fetchAll for inner components. (eg AddTodoContainer.fetchAll)
+    return Promise.all([
+      TodoListContainer.fetchData(dispatch)
+    ])
   }
   componentDidMount() {
     console.log(this.props.children)
