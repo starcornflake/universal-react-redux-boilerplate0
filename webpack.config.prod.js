@@ -19,7 +19,8 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"',
+      'window.__CLIENT__': 'true',
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {

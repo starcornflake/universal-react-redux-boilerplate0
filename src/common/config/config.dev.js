@@ -4,8 +4,7 @@ const config = {
     port: 3000
   },
   api: {
-    host: 'localhost',
-    port: 3000
+    endpoint: 'http://localhost:3000/api'
   },
   jsBundle: 'bundle.js'
 }

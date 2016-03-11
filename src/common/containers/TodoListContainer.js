@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import TodoList from '../components/TodoList'
-
+import { fetchTodos } from '../actions'
 
 // class TodoListContainer extends Component {
 //   async componentWillMount() {
@@ -29,6 +29,8 @@ const TodoListContainer = React.createClass({
   async componentDidMount() {
     console.log('compDitMount')
     try {
+      const { loadTodos } = this.props
+      await loadTodos()
       await new Promise((resolve) => {
         setTimeout(() => {
           console.log('prom')
@@ -41,21 +43,31 @@ const TodoListContainer = React.createClass({
   },
   render() {
     const { todos } = this.props
+    console.log(todos)
     return (
-      <TodoList todos={todos}/>
+      <TodoList todos={todos} />
     )
-    // return (
-    //   <h1>woah</h1>
-    // )
   }
 })
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
-    todos: state.todos
+    todos: state.todos.items
+  }
+  // return {
+  //   todos: state.todos
+  // }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadTodos: () => {
+      dispatch(fetchTodos())
+    }
   }
 }
 
 // export default connect(mapStateToProps)(TodoList)
 // export default TodoListContainer
-export default connect(mapStateToProps)(TodoListContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListContainer)

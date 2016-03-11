@@ -25,6 +25,6 @@ function TodoList({ todos }) {
   )
 }
 
-TodoList.propTypes = propTypes
+// TodoList.propTypes = propTypes
 
 export default TodoList

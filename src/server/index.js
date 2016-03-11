@@ -8,9 +8,9 @@ import { match, RouterContext } from 'react-router'
 import favicon from 'serve-favicon'
 
 import config from './config'
+import api from './config/api'
 import Root from '../common/components/Root'
 import configureStore from '../common/store/configureStore'
-import routes from '../common/config/routes'
 
 const app = express()
 const port = process.env.PORT || config.server.port
@@ -33,38 +33,40 @@ if (process.env.NODE_ENV !== 'production') {
 app.use('/public', express.static(path.resolve(__dirname, '../../public')))
 app.use(favicon(path.join(__dirname, '../../public/favicon.ico')))
 
+app.use('/api', api)
+
 app.get('*', handleRender)
 
-// function handleRender(req, res, err) {
-//   res.send(renderFullPage());
-// }
-
 function handleRender(req, res, err) {
-  match({ routes, location: req.url }, (err, redirect, props) => {
-    if (err) {
-      // error during route matching
-      res.status(500).send(err.message)
-    } else if (redirect) {
-      res.redirect(redirect.pathname + redirect.search)
-    } else if (props) {
-      // we have a match
-      const store = configureStore()
-
-      console.log(props.components)
-
-      const appHtml = renderToString(
-        <Root store={store}>
-          <RouterContext {...props} />
-        </Root>
-      )
-
-      res.send(renderFullPage(appHtml, store.getState()))
-    } else {
-      // no match
-      res.status(404).send('Not Found')
-    }
-  })
+  res.send(renderFullPage());
 }
+
+// function handleRender(req, res, err) {
+//   match({ routes, location: req.url }, (err, redirect, props) => {
+//     if (err) {
+//       // error during route matching
+//       res.status(500).send(err.message)
+//     } else if (redirect) {
+//       res.redirect(redirect.pathname + redirect.search)
+//     } else if (props) {
+//       // we have a match
+//       const store = configureStore()
+//
+//       console.log(props.components)
+//
+//       const appHtml = renderToString(
+//         <Root store={store}>
+//           <RouterContext {...props} />
+//         </Root>
+//       )
+//
+//       res.send(renderFullPage(appHtml, store.getState()))
+//     } else {
+//       // no match
+//       res.status(404).send('Not Found')
+//     }
+//   })
+// }
 
 function renderFullPage(html, initialState) {
   return `
