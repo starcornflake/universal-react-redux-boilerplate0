@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development NODEMON=disabled babel-node src/server",
     "devs": "NODE_ENV=development NODEMON=enabled nodemon --watch src/ --exec babel-node src/server",
-    "build": "npm run clean && babel src/ -s -d build/ && webpack --config webpack.config.prod.js",
+    "build": "npm run clean && ./node_modules/.bin/babel src/ -s -d build/ && webpack --config webpack.config.prod.js",
     "clean": "rm -rf build/ public/js/",
     "start": "NODE_ENV=production node build/server",
     "buildAndStart": "npm run build && npm run start"
