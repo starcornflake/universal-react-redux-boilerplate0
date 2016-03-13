@@ -11,5 +11,7 @@ const DevTools = createDevTools(
     <LogMonitor />
   </DockMonitor>
 )
-
+// const DevTools = createDevTools(
+//   <Inspector />
+// )
 export default DevTools

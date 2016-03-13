@@ -8,11 +8,11 @@ import {
   DELETE,
 } from '../middlewares/api'
 
-export const TODO_ADD = Symbol('TODO_ADD')
-export const TODOS_REQUEST = Symbol('TODOS_REQUEST')
-export const TODOS_SUCCESS = Symbol('TODOS_SUCCESS')
-export const TODOS_FAILURE = Symbol('TODOS_FAILURE')
-export const TODOS_SHOULD_FETCH = Symbol('TODOS_SHOULD_FETCH')
+export const TODO_ADD = 'TODO_ADD'
+export const TODOS_REQUEST = 'TODOS_REQUEST'
+export const TODOS_SUCCESS = 'TODOS_SUCCESS'
+export const TODOS_FAILURE = 'TODOS_FAILURE'
+export const TODOS_SHOULD_FETCH = 'TODOS_SHOULD_FETCH'
 
 let nextTodoId = 0
 export function addTodo(text) {
@@ -84,7 +84,6 @@ export function fetchTodosIfNeeded() {
     const todos = getState().todos
     if (!todos.shouldFetch) {
       return dispatch(shouldFetchTodos(true))
-      return null // will immediately return in Promise.all
     }
     return dispatch(fetchTodos()) // this returns a promise from the middleware
   }

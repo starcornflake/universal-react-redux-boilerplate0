@@ -3,7 +3,7 @@ import {
   TODOS_REQUEST,
   TODOS_SUCCESS,
   TODOS_FAILURE,
-  TODOS_SSR_UPDATE,
+  TODOS_SHOULD_FETCH,
 } from '../actions/todosActionCreators'
 
 const item = (state = {}, action) => {
@@ -31,6 +31,9 @@ const items = (state = [], action) => {
   }
 }
 
+// shouldFetch should always be true, except when the server renders.
+// this is so that the client will know that it shouldn't fetch when the server
+// has already did. Otherwise, it should be true at all times
 function reducer(state = {
   isFetching: false,
   shouldFetch: true,
@@ -58,10 +61,10 @@ function reducer(state = {
         ...state,
         items: items(state.items, action)
       }
-    case TODOS_SSR_UPDATE:
+    case TODOS_SHOULD_FETCH:
       return {
         ...state,
-        ssr: action.ssr
+        shouldFetch: action.shouldFetch
       }
     default:
       return state

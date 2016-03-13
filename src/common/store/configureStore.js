@@ -16,23 +16,16 @@ if (process.env.NODE_ENV === 'production') {
         applyMiddleware(thunk, api)
       )
     )
-    return store;
+    return store
   }
 } else {
   const DevTools = require('../components/DevTools').default
-  const createLogger = require('redux-logger')
-  const logger = createLogger({
-    actionTransformer: (action) => ({
-      ...action,
-      type: String(action.type),
-    })
-  })
   configureStore = (initialState) => {
     const store = createStore(
       rootReducer,
       initialState,
       compose(
-        applyMiddleware(thunk, api, logger),
+        applyMiddleware(thunk, api),
         DevTools.instrument()
       )
     )
