@@ -1,22 +1,2 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Router, browserHistory } from 'react-router'
-import { Provider } from 'react-redux'
-
-// import config from './config'
-// import Root from '../common/components/Root'
-import configureStore from '../common/store/configureStore'
-import routes from '../common/config/routes'
-
-
-const initialState = __INITIAL_STATE__
-const store = configureStore(initialState)
-console.log('__INITIAL_STATE__', initialState)
-console.log('__CLIENT__:', __CLIENT__)
-console.log('process.env.NODE_ENV:', process.env.NODE_ENV)
-ReactDOM.render(
-  <Provider store={store}>
-    <Router routes={routes} history={browserHistory} />
-  </Provider>,
-  document.getElementById('root')
-)
+require('../common/config')
+require('./client')

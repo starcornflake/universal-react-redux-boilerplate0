@@ -1,11 +1,29 @@
+import log from 'loglevel'
+
+let config
+
 if (process.env.NODE_ENV === 'production') {
-  const config = require('./config.prod')
-  // window.__CLIENT__ = true
+  config = {
+    api: {
+      baseUrl: 'http://bumpysounds.com/api'
+    }
+  }
 
-  module.exports = config
+  log.setLevel('error')
 } else {
-  const config = require('./config.dev')
-  // window.__CLIENT__ = true
+  config = {
+    api: {
+      baseUrl: 'http://localhost:3000/api'
+    }
+  }
 
-  module.exports = config
+  log.enableAll()
 }
+
+if (__CLIENT__) {
+  window.log = log
+} else {
+  global.log = log
+}
+
+export default config

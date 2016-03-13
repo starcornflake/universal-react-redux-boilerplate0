@@ -5,7 +5,7 @@ Another important point: We're not doing 100% server rendering. That is, anythin
 
 
 ## Tips n tricks
-* Whenever you want to use `require`, use `modules.export` on the file you're requiring (this isn't necessary for all cases, but let's be consistent)
+* Whenever you want to use `require`, and the target module exports as `export default..`, use `require('module').default`
 * You can't use `import` or `export` at the top level. That is, they can't be conditionally run
   * Stick to `import` or `export` if you can.
 * Whenever you define globals on node with `global.__SOMETHING__`, you don't need the `global.` to reference it

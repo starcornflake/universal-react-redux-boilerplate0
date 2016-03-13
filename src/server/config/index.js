@@ -1,13 +1,29 @@
+import log from 'loglevel'
+
+let config
+
 if (process.env.NODE_ENV === 'production') {
-  const config = require('./config.prod')
-  global.__PRODUCTION__ = true
-  global.__CLIENT__ = false
+  config = {
+    server: {
+      host: 'localhost',
+      port: 3000
+    },
+    jsBundle: 'bundle.js'
+  }
 
-  module.exports = config
+  log.setLevel('error')
 } else {
-  const config = require('./config.dev')
-  global.__PRODUCTION__ = false
-  global.__CLIENT__ = false
+  config = {
+    server: {
+      host: 'localhost',
+      port: 3000
+    },
+    jsBundle: 'bundle.js'
+  }
 
-  module.exports = config
+  log.enableAll()
 }
+
+global.__CLIENT__ = false
+
+export default config
