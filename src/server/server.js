@@ -39,43 +39,42 @@ app.use('/api', api)
 
 app.get('*', handleRender)
 
-// function handleRender(req, res, err) {
-//   res.send(renderFullPage());
-// }
-
 function handleRender(req, res, err) {
-  match({ routes, location: req.url }, (err, redirect, routerProps) => {
-    if (err) {
-      // error during route matching
-      res.status(500).send(err.message)
-    } else if (redirect) {
-      res.redirect(redirect.pathname + redirect.search)
-    } else if (routerProps) {
-      // we have a match
-      const store = configureStore()
-      Promise.all(fetchRouteComponentsData(store.dispatch, routerProps)).then(() => {
-        try {
-          const appHtml = renderToString(
-            <Root store={store}>
-              <RouterContext {...routerProps} />
-            </Root>
-          )
-          res.send(renderFullPage(appHtml, store.getState()))
-        } catch(e) {
-          response.status(500).send("Something went wrong");
-        }
-      }).catch((response) => {
-        console.log(response);
-        response.status(500).send("Something went wrong");
-      })
-    } else {
-      // no match
-      res.status(404).send('Not Found')
-    }
-  })
+  res.send(renderFullPage());
 }
 
+// function handleRender(req, res, err) {
+//   match({ routes, location: req.url }, (err, redirect, routerProps) => {
+//     if (err) {
+//       // error during route matching
+//       res.status(500).send(err.message)
+//     } else if (redirect) {
+//       res.redirect(redirect.pathname + redirect.search)
+//     } else if (routerProps) {
+//       // we have a match
+//       const store = configureStore()
+//       Promise.all(fetchRouteComponentsData(store.dispatch, routerProps))
+//         .then(() => {
+//           const appHtml = renderToString(
+//             <Root store={store}>
+//               <RouterContext {...routerProps} />
+//             </Root>
+//           )
+//           res.send(renderFullPage(appHtml, store.getState()))
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//           res.status(500).send("Something went wrong");
+//         })
+//     } else {
+//       // no match
+//       res.status(404).send('Not Found')
+//     }
+//   })
+// }
+
 function renderFullPage(html, initialState) {
+  html = html ? html : ''
   return `
     <!doctype html>
     <html>
