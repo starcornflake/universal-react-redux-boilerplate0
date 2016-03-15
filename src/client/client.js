@@ -12,9 +12,11 @@ const store = configureStore(initialState)
 console.log('__INITIAL_STATE__', initialState)
 console.log('__CLIENT__:', __CLIENT__)
 console.log('process.env.NODE_ENV:', process.env.NODE_ENV)
+
+
 ReactDOM.render(
   <Root store={store}>
-    <Router routes={routes} history={browserHistory} />
+    <Router routes={routes(store)} history={browserHistory} />
   </Root>,
   document.getElementById('root')
 )

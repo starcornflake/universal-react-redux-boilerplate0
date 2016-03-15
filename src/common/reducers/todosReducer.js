@@ -48,6 +48,7 @@ function reducer(state = {
     case TODOS_SUCCESS:
       return {
         ...state,
+        isFetching: false,
         shouldFetch: action.shouldFetch,
         items: action.data
       }

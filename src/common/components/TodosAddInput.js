@@ -1,16 +1,17 @@
 import React, { PropTypes } from 'react'
 
 const propTypes = {
-  onSubmitInput: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 }
 
-function AddTodoInput({ onSubmitInput }) {
+function TodosAddInput({ onSubmit }) {
   let input
 
   return (
     <div>
       <form onSubmit={(e) => {
-        onSubmitInput(e, input.value)
+        e.preventDefault()
+        onSubmit(input.value)
         input.value = ''
       }}>
         <input ref={(node) => {
@@ -24,6 +25,6 @@ function AddTodoInput({ onSubmitInput }) {
   )
 }
 
-AddTodoInput.propTypes = propTypes
+TodosAddInput.propTypes = propTypes
 
-export default AddTodoInput
+export default TodosAddInput

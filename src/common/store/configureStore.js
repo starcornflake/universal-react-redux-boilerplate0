@@ -1,9 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
-
 import rootReducer from '../reducers'
-import api from '../middlewares/api'
+import apiMiddleware from '../middlewares/apiMiddleware'
 
 let configureStore
 
@@ -13,19 +12,22 @@ if (process.env.NODE_ENV === 'production') {
       rootReducer,
       initialState,
       compose(
-        applyMiddleware(thunk, api)
+        applyMiddleware(thunk, apiMiddleware)
       )
     )
     return store
   }
 } else {
   const DevTools = require('../components/DevTools').default
+  // const createLogger = require('redux-logger')
+  // const logger = createLogger()
+
   configureStore = (initialState) => {
     const store = createStore(
       rootReducer,
       initialState,
       compose(
-        applyMiddleware(thunk, api),
+        applyMiddleware(thunk, apiMiddleware),
         DevTools.instrument()
       )
     )

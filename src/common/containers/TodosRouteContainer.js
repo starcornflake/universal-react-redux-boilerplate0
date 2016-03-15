@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-import AddTodoContainer from './AddTodoContainer'
-import TodoListContainer from './TodoListContainer'
+import TodosAddContainer from './TodosAddContainer'
+import TodosListContainer from './TodosListContainer'
 import { fetchComponentsData } from '../utils/serverFetchHelpers'
 
-class HomeContainer extends Component {
+class TodosRouteContainer extends Component {
   static fetchData(dispatch, routerProps) {
     // Only route components' fetchAll can be reached. Inner components won't.
     // So this is a good place to fetchAll for the HomeComponent's things
@@ -13,15 +13,15 @@ class HomeContainer extends Component {
     // Use dispatch() that returns a promise, instead of creating your own promise
 
     return Promise.all(fetchComponentsData(dispatch, routerProps, [
-      AddTodoContainer,
-      TodoListContainer,
+      TodosAddContainer,
+      TodosListContainer,
     ]))
   }
   render() {
     return (
       <div>
-        <AddTodoContainer />
-        <TodoListContainer />
+        <TodosAddContainer />
+        <TodosListContainer />
       </div>
     )
   }
@@ -30,4 +30,4 @@ class HomeContainer extends Component {
 
 
 
-export default HomeContainer
+export default TodosRouteContainer

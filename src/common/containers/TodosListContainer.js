@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import log from 'loglevel'
 
-import TodoList from '../components/TodoList'
+import TodosList from '../components/TodosList'
 import { fetchTodosIfNeeded } from '../actions/todosActionCreators'
 
 
@@ -12,15 +12,23 @@ function mapStateToProps(state) {
   }
 }
 
-class TodoListContainer extends Component {
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchTodosData: () => {
+      dispatch(fetchTodosIfNeeded())
+    }
+  }
+}
+
+class TodosListContainer extends Component {
   static fetchData(dispatch) {
     return dispatch(fetchTodosIfNeeded())
   }
   async componentDidMount() {
     // if server rendered, dispatch action to make it false. else, fetch api
-    const { dispatch } = this.props
+    const { fetchTodosData } = this.props
     try {
-      const todos = await dispatch(fetchTodosIfNeeded())
+      const todos = await fetchTodosData()
     } catch (err) {
       console.log('Error in TodoListContainer', err)
     }
@@ -31,9 +39,9 @@ class TodoListContainer extends Component {
   render() {
     const { todos } = this.props
     return (
-      <TodoList todos={todos} />
+      <TodosList todos={todos} />
     )
   }
 }
 
-export default connect(mapStateToProps)(TodoListContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TodosListContainer)

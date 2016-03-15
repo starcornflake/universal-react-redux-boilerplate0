@@ -6,7 +6,7 @@ import {
   POST,
   PUT,
   DELETE,
-} from '../middlewares/api'
+} from '../middlewares/apiMiddleware'
 
 export const TODO_ADD = 'TODO_ADD'
 export const TODOS_REQUEST = 'TODOS_REQUEST'

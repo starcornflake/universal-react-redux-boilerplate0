@@ -10,7 +10,7 @@ const propTypes = {
   }).isRequired).isRequired,
 }
 
-function TodoList({ todos }) {
+function TodosList({ todos }) {
   return (
     <ul>
       {todos.map((todo) => {
@@ -27,4 +27,4 @@ function TodoList({ todos }) {
 
 // TodoList.propTypes = propTypes
 
-export default TodoList
+export default TodosList
